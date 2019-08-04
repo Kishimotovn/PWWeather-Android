@@ -1,5 +1,6 @@
 package kishimotovn.pocketworksWeather.features.landing
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import kishimotovn.pocketworksWeather.R
 import kishimotovn.pocketworksWeather.base.BaseActivity
 import kishimotovn.pocketworksWeather.databinding.ActivityLandingBinding
+import kishimotovn.pocketworksWeather.features.search.SearchActivity
 
 
 class LandingActivity: BaseActivity() {
@@ -40,7 +42,8 @@ class LandingActivity: BaseActivity() {
     }
 
     private fun routeToHome() {
-        Log.d("LandingActivity", "Routing to Home")
+        val intent = Intent(this, SearchActivity::class.java)
+        this.startActivity(intent)
     }
 
     private fun setupUI() {

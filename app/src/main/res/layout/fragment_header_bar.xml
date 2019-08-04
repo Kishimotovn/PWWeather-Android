@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="kishimotovn.pocketworksWeather.features.shared.viewmodels.HeaderBarViewModel"/>
+        <variable
+            name="onLeftButtonClickListener"
+            type="android.view.View.OnClickListener"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:singleLine="true"
+            android:text="@{viewModel.title}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/leftButton"
+            app:layout_constraintEnd_toStartOf="@id/rightButton"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            tools:text="very very long value to "
+            android:gravity="center"/>
+        <ImageButton
+            android:id="@+id/leftButton"
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@{viewModel.leftButtonDrawable}"
+            android:onClick="@{onLeftButtonClickListener}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <ImageButton
+            android:id="@+id/rightButton"
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="?android:attr/actionBarSize"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -9,6 +9,9 @@ interface PWCityDao {
     @Query("SELECT * FROM cities")
     fun getCities(): LiveData<List<PWCity>>
 
+    @Query("SELECT * FROM cities where name LIKE '%' || :searchTerm || '%' LIMIT 30")
+    fun searchCity(searchTerm: String): LiveData<List<PWCity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCities(cities: List<PWCity>)
 
