@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import kishimotovn.pocketworksWeather.R
 import kishimotovn.pocketworksWeather.base.BaseActivity
 import kishimotovn.pocketworksWeather.databinding.ActivityLandingBinding
+import kishimotovn.pocketworksWeather.features.home.HomeActivity
 import kishimotovn.pocketworksWeather.features.search.SearchActivity
 
 
@@ -27,7 +28,7 @@ class LandingActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         this.binding = ActivityLandingBinding.inflate(LayoutInflater.from(this))
         this.setContentView(this.binding.root)
-        this.setupUI()
+        this.initializeUI()
         this.bindUI()
     }
 
@@ -42,11 +43,12 @@ class LandingActivity: BaseActivity() {
     }
 
     private fun routeToHome() {
-        val intent = Intent(this, SearchActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         this.startActivity(intent)
+        this.finish()
     }
 
-    private fun setupUI() {
+    private fun initializeUI() {
         val option = RequestOptions().centerCrop()
         Glide.with(this)
                 .load(R.drawable.bg_main)

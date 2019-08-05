@@ -1,6 +1,7 @@
 package kishimotovn.pocketworksWeather.features.search.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -20,7 +21,7 @@ class SearchResultItemDiffCallback: DiffUtil.ItemCallback<Pair<PWCity, String>>(
     }
 }
 
-class SearchResultListAdapter: ListAdapter<Pair<PWCity, String>, SearchResultListAdapter.ViewHolder>(SearchResultItemDiffCallback()) {
+class SearchResultListAdapter(val delegate: Delegate?): ListAdapter<Pair<PWCity, String>, SearchResultListAdapter.ViewHolder>(SearchResultItemDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemSearchResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
@@ -28,15 +29,23 @@ class SearchResultListAdapter: ListAdapter<Pair<PWCity, String>, SearchResultLis
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = this.getItem(position)
-        holder.bind(item)
+        val onClickListener = View.OnClickListener {
+            this.delegate?.didSelect(item.first, position)
+        }
+        holder.bind(item, onClickListener)
     }
 
     class ViewHolder(val binding: ItemSearchResultBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Pair<PWCity, String>) {
+        fun bind(item: Pair<PWCity, String>, clickListener: View.OnClickListener) {
             with(this.binding) {
                 this.viewModel = SearchResultItemViewModel(item.first, item.second)
+                this.clickListener = clickListener
                 this.executePendingBindings()
             }
         }
+    }
+
+    interface Delegate {
+        fun didSelect(item: PWCity, index: Int)
     }
 }

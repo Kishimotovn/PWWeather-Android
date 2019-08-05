@@ -13,19 +13,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import kishimotovn.pocketworksWeather.R
 import kishimotovn.pocketworksWeather.base.BaseActivity
+import kishimotovn.pocketworksWeather.data.local.models.PWCity
 import kishimotovn.pocketworksWeather.databinding.ActivitySearchBinding
 import kishimotovn.pocketworksWeather.features.search.adapter.SearchResultListAdapter
 import kishimotovn.pocketworksWeather.features.shared.viewmodels.HeaderBarViewModel
+import android.content.Intent
+import kishimotovn.pocketworksWeather.R
 
-class SearchActivity : BaseActivity() {
+
+class SearchActivity : BaseActivity(), SearchResultListAdapter.Delegate {
     lateinit var binding: ActivitySearchBinding
 
     private val viewModel by lazy {
         ViewModelProviders.of(this, this.viewModelFactory).get(SearchViewModel::class.java)
     }
-    private val adapter = SearchResultListAdapter()
+    private val adapter = SearchResultListAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.getComponent().inject(this)
@@ -34,6 +37,13 @@ class SearchActivity : BaseActivity() {
         this.setContentView(this.binding.root)
         this.initializeUI()
         this.bindUI()
+    }
+
+    override fun didSelect(item: PWCity, index: Int) {
+        val resultIntent = Intent()
+        resultIntent.putExtra(SEARCH_CITY_RESULT_INTENT_KEY, item)
+        this.setResult(SEARCH_CITY_FINISH_RESULT_CODE, resultIntent)
+        this.finish()
     }
 
     private fun bindUI() {
@@ -78,5 +88,17 @@ class SearchActivity : BaseActivity() {
             this.resultRecycleView.adapter = context.adapter
             this.executePendingBindings()
         }
+    }
+
+    override fun onBackPressed() {
+        this.setResult(SEARCH_CITY_DISMISSED_RESULT_CODE)
+        this.finish()
+    }
+
+    companion object {
+        const val SEARCH_CITY_REQUEST_CODE = 110
+        const val SEARCH_CITY_FINISH_RESULT_CODE = 111
+        const val SEARCH_CITY_DISMISSED_RESULT_CODE = 112
+        const val SEARCH_CITY_RESULT_INTENT_KEY = "city"
     }
 }

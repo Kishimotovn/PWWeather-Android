@@ -32,7 +32,7 @@ class AppModule(private val app: Application) {
 
     @Provides
     @Singleton
-    fun provideHDatabase(application : Application): PWDatabase {
+    fun providePWDatabase(application : Application): PWDatabase {
         return Room.databaseBuilder(application.applicationContext, PWDatabase::class.java, "pocketworks_weather.db")
                 .fallbackToDestructiveMigration()
                 .build()
