@@ -79,6 +79,14 @@
             android:textSize="20sp"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/userCityList"
+        android:background="@android:color/white"
+        android:alpha="0.5"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userCityList"
         android:layout_width="0dp"
@@ -86,7 +94,8 @@
         app:layout_constraintTop_toBottomOf="@id/topBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"/>
     <ProgressBar
         android:id="@+id/activityIndicator"
         android:layout_width="40dp"

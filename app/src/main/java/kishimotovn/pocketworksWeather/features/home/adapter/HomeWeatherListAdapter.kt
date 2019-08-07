@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import kishimotovn.pocketworksWeather.data.local.models.PWUnitSystem
 import kishimotovn.pocketworksWeather.data.remote.models.CityWeather
 import kishimotovn.pocketworksWeather.databinding.ItemCityWeatherBinding
 import kishimotovn.pocketworksWeather.features.home.viewmodels.CityWeatherItemViewModel
@@ -16,11 +17,11 @@ class HomeWeatherItemDiffCallback: DiffUtil.ItemCallback<CityWeather>() {
     }
 
     override fun areContentsTheSame(oldItem: CityWeather, newItem: CityWeather): Boolean {
-        return oldItem.name == newItem.name
+        return oldItem.name == newItem.name && oldItem.dt == newItem.dt
     }
 }
 
-class HomeWeatherListAdapter(val delegate: Delegate?): ListAdapter<CityWeather, HomeWeatherListAdapter.ViewHolder>(HomeWeatherItemDiffCallback()) {
+class HomeWeatherListAdapter(val delegate: Delegate?, var unitSystem: PWUnitSystem = PWUnitSystem.metric): ListAdapter<CityWeather, HomeWeatherListAdapter.ViewHolder>(HomeWeatherItemDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemCityWeatherBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
@@ -31,13 +32,13 @@ class HomeWeatherListAdapter(val delegate: Delegate?): ListAdapter<CityWeather, 
         val onClickListener = View.OnClickListener {
             this.delegate?.didSelect(item, position)
         }
-        holder.bind(item, onClickListener)
+        holder.bind(item, this.unitSystem, onClickListener)
     }
 
     class ViewHolder(val binding: ItemCityWeatherBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: CityWeather, clickListener: View.OnClickListener) {
+        fun bind(item: CityWeather, unitSystem: PWUnitSystem, clickListener: View.OnClickListener) {
             with(this.binding) {
-                this.viewModel = CityWeatherItemViewModel(item)
+                this.viewModel = CityWeatherItemViewModel(item, unitSystem)
                 this.clickListener = clickListener
                 this.executePendingBindings()
             }

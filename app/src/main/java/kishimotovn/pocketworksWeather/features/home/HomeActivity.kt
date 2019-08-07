@@ -15,13 +15,12 @@ import com.bumptech.glide.request.RequestOptions
 import kishimotovn.pocketworksWeather.R
 import kishimotovn.pocketworksWeather.base.BaseActivity
 import kishimotovn.pocketworksWeather.data.local.models.PWCity
+import kishimotovn.pocketworksWeather.data.local.models.PWUnitSystem
 import kishimotovn.pocketworksWeather.data.remote.models.CityWeather
 import kishimotovn.pocketworksWeather.databinding.ActivityHomeBinding
 import kishimotovn.pocketworksWeather.features.home.adapter.HomeWeatherListAdapter
-import kishimotovn.pocketworksWeather.features.landing.LandingViewModel
 import kishimotovn.pocketworksWeather.features.search.SearchActivity
 import kishimotovn.pocketworksWeather.features.search.SearchActivity.Companion.SEARCH_CITY_RESULT_INTENT_KEY
-import kishimotovn.pocketworksWeather.features.search.adapter.SearchResultListAdapter
 import kishimotovn.pocketworksWeather.features.shared.viewmodels.HeaderBarViewModel
 
 class HomeActivity : BaseActivity(), HomeWeatherListAdapter.Delegate {
@@ -54,6 +53,20 @@ class HomeActivity : BaseActivity(), HomeWeatherListAdapter.Delegate {
             Log.d("HomeActivity", "got list ${it}")
             this.adapter.submitList(it)
         })
+        this.viewModel.unitSystem.observe(this, Observer {
+            when (it) {
+                PWUnitSystem.metric -> {
+                    this.binding.celciusButton.alpha = 1.0f
+                    this.binding.fahrenheitButton.alpha = 0.5f
+                }
+                PWUnitSystem.imperial -> {
+                    this.binding.celciusButton.alpha = 0.5f
+                    this.binding.fahrenheitButton.alpha = 1.0f
+                }
+            }
+            this.adapter.unitSystem = it
+            this.adapter.notifyDataSetChanged()
+        })
     }
 
     private fun initializeUI() {
@@ -72,6 +85,12 @@ class HomeActivity : BaseActivity(), HomeWeatherListAdapter.Delegate {
             }
             this.userCityList.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             this.userCityList.adapter = context.adapter
+            this.celciusButton.setOnClickListener {
+                context.viewModel.changeUnitSystem(PWUnitSystem.metric)
+            }
+            this.fahrenheitButton.setOnClickListener {
+                context.viewModel.changeUnitSystem(PWUnitSystem.imperial)
+            }
             this.executePendingBindings()
         }
     }
@@ -85,7 +104,7 @@ class HomeActivity : BaseActivity(), HomeWeatherListAdapter.Delegate {
         if (requestCode == SearchActivity.SEARCH_CITY_REQUEST_CODE) {
             if (resultCode == SearchActivity.SEARCH_CITY_FINISH_RESULT_CODE) {
                 data?.getParcelableExtra<PWCity>(SEARCH_CITY_RESULT_INTENT_KEY)?.let {
-                    Log.d("HomeActivity", "Finished searching for city: ${it.name}")
+                    this.viewModel.addCity(it)
                 }
             }
         }

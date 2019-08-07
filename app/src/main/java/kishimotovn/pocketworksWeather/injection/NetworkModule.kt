@@ -1,25 +1,18 @@
 package kishimotovn.pocketworksWeather.injection
 
 import android.content.Context
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.JsonReader
-import com.squareup.moshi.JsonWriter
 import kishimotovn.pocketworksWeather.BuildConfig
 import kishimotovn.pocketworksWeather.data.remote.DataService
-import kishimotovn.pocketworksWeather.data.remote.Repository
+import kishimotovn.pocketworksWeather.data.remote.RemoteRepository
 import dagger.Module
 import dagger.Provides
-import kishimotovn.pocketworksWeather.factory.LiveDataCallAdapterFactory
-import kishimotovn.pocketworksWeather.utils.LiveDataCallAdapter
 import javax.inject.Singleton
 import retrofit2.Retrofit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.text.DateFormat
 import com.squareup.moshi.Moshi
 import kishimotovn.pocketworksWeather.utils.DateFromTimeIntervalJSONAdapter
-import java.lang.Exception
 import java.util.*
 
 
@@ -64,7 +57,6 @@ class NetworkModule(private val context: Context) {
         return Retrofit.Builder()
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .baseUrl("http://api.openweathermap.org/")
-                .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .client(client)
                 .build()
     }
@@ -77,7 +69,7 @@ class NetworkModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideRepository(dataService: DataService): Repository {
-        return Repository(dataService)
+    fun provideRepository(dataService: DataService): RemoteRepository {
+        return RemoteRepository(dataService)
     }
 }
