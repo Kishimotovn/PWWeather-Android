@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -19,6 +20,7 @@ import kishimotovn.pocketworksWeather.data.local.models.PWUnitSystem
 import kishimotovn.pocketworksWeather.data.remote.models.CityWeather
 import kishimotovn.pocketworksWeather.databinding.ActivityHomeBinding
 import kishimotovn.pocketworksWeather.features.home.adapter.HomeWeatherListAdapter
+import kishimotovn.pocketworksWeather.features.home.adapter.SwipeToDeleteCallback
 import kishimotovn.pocketworksWeather.features.search.SearchActivity
 import kishimotovn.pocketworksWeather.features.search.SearchActivity.Companion.SEARCH_CITY_RESULT_INTENT_KEY
 import kishimotovn.pocketworksWeather.features.shared.viewmodels.HeaderBarViewModel
@@ -85,6 +87,16 @@ class HomeActivity : BaseActivity(), HomeWeatherListAdapter.Delegate {
             }
             this.userCityList.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             this.userCityList.adapter = context.adapter
+            val swipeHandler = object: SwipeToDeleteCallback(context) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    (viewHolder as? HomeWeatherListAdapter.ViewHolder)?.cityId?.let {
+                        context.viewModel.removeCity(it)
+                    }
+                    Log.d("HomeActivity", "swiped ${viewHolder.adapterPosition}")
+                }
+            }
+            val itemTouchHelper = ItemTouchHelper(swipeHandler)
+            itemTouchHelper.attachToRecyclerView(this.userCityList)
             this.celciusButton.setOnClickListener {
                 context.viewModel.changeUnitSystem(PWUnitSystem.metric)
             }

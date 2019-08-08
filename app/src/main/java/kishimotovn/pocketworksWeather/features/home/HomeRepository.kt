@@ -23,6 +23,18 @@ class HomeRepository @Inject constructor(val context: Context, val prefManager: 
         }
     }
 
+    fun removeIfNeeded(cityId: String): Boolean {
+        val cityIds = this.getCityIds().toMutableList()
+        return if (!cityIds.contains(cityId)) {
+            false
+        } else {
+            cityIds.remove(cityId)
+            val cityString = cityIds.joinToString(",")
+            this.prefManager.setString("userCities", cityString)
+            true
+        }
+    }
+
     fun getUserCityWeather() = liveData(context = Dispatchers.IO) {
         val cityIds = this@HomeRepository.getCityIds()
 

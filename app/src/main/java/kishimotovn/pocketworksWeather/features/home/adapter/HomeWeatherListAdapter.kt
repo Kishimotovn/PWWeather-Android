@@ -36,12 +36,15 @@ class HomeWeatherListAdapter(val delegate: Delegate?, var unitSystem: PWUnitSyst
     }
 
     class ViewHolder(val binding: ItemCityWeatherBinding): RecyclerView.ViewHolder(binding.root) {
+        var cityId: String? = null
+
         fun bind(item: CityWeather, unitSystem: PWUnitSystem, clickListener: View.OnClickListener) {
             with(this.binding) {
                 this.viewModel = CityWeatherItemViewModel(item, unitSystem)
                 this.clickListener = clickListener
                 this.executePendingBindings()
             }
+            this.cityId = item.id?.toString()
         }
     }
 

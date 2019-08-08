@@ -47,7 +47,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/ic_add_circle_black_24dp"
@@ -55,7 +55,7 @@
             android:scaleType="fitCenter"/>
         <Button
             android:id="@+id/celciusButton"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -64,10 +64,23 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textSize="20sp"
+            android:textAlignment="textEnd"
+            android:paddingEnd="10dp"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/celciusButton"
+            app:layout_constraintBottom_toBottomOf="@id/celciusButton"
+            app:layout_constraintStart_toEndOf="@id/celciusButton"
+            app:layout_constraintEnd_toStartOf="@id/fahrenheitButton"
+            android:text="/"
+            android:textColor="@android:color/white"
+            android:alpha="0.5"
+            android:textSize="20sp"/>
         <Button
             android:id="@+id/fahrenheitButton"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/celciusButton"
             app:layout_constraintTop_toTopOf="parent"
@@ -77,6 +90,9 @@
             android:textColor="@android:color/white"
             android:alpha="0.5"
             android:textSize="20sp"
+            android:textAlignment="textStart"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <View

@@ -34,10 +34,19 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository):
     }
 
     fun addCity(city: PWCity) {
-        city.id.toIntOrNull()?.let {
-
-        }
         this.repository.insertIfNeeded(city.id)
         this.fetchWeatherDataForMyCities()
+    }
+
+    fun removeCity(cityId: String) {
+        this.userCityWeather.value?.let { currentData ->
+            currentData.indexOfFirst { it.id == cityId.toIntOrNull() }?.let {
+                val newUserCityList = currentData.toMutableList()
+                newUserCityList.removeAt(it)
+                this.repository.removeIfNeeded(cityId)
+
+                this.userCityWeather.value = newUserCityList
+            }
+        }
     }
 }

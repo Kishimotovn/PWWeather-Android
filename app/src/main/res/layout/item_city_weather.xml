@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toStartOf="@id/windInfoTextView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp">
             <TextView
@@ -48,6 +48,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:text="@{viewModel.cityName}"
+                android:fontFamily="sans-serif-medium"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
@@ -60,9 +61,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/cityInfoLayout"
             android:textColor="@android:color/white"
-            android:textSize="26sp"
-            android:layout_marginEnd="30dp"
+            android:textSize="30sp"
+            android:layout_marginEnd="16dp"
             android:text="@{viewModel.windInformation}"
+            android:fontFamily="sans-serif-light"
             />
         <View
             android:layout_width="0dp"
