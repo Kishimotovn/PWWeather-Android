@@ -19,6 +19,7 @@ import kishimotovn.pocketworksWeather.databinding.ActivitySearchBinding
 import kishimotovn.pocketworksWeather.features.search.adapter.SearchResultListAdapter
 import kishimotovn.pocketworksWeather.features.shared.viewmodels.HeaderBarViewModel
 import android.content.Intent
+import android.graphics.Color
 import kishimotovn.pocketworksWeather.R
 
 
@@ -72,6 +73,7 @@ class SearchActivity : BaseActivity(), SearchResultListAdapter.Delegate {
                     .apply(option)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(this.bgMain)
+            this.headerBar.root.setBackgroundColor(Color.parseColor("#80000000"))
             this.headerBar.viewModel = HeaderBarViewModel("Enter city name", null)
             this.searchEditText.addTextChangedListener(object: TextWatcher {
                 override fun afterTextChanged(p0: Editable?) {

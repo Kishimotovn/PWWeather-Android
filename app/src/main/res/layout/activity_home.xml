@@ -32,14 +32,51 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerBar"
+        android:background="@android:color/white"
+        android:alpha="0.5"
+        android:visibility="gone"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userCityList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"/>
+    <ProgressBar
+        android:id="@+id/activityIndicator"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminateTint="@android:color/white"
+        app:layout_constraintTop_toTopOf="@id/userCityList"
+        app:layout_constraintBottom_toBottomOf="@id/userCityList"
+        app:layout_constraintStart_toStartOf="@id/userCityList"
+        app:layout_constraintEnd_toEndOf="@id/userCityList"
+        />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userCityList"
+        android:background="@android:color/white"
+        android:alpha="0.5"/>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/topBar"
+        android:id="@+id/bottomBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerBar"
-        android:layout_marginTop="16dp">
+        app:layout_constraintTop_toBottomOf="@id/userCityList"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp">
         <ImageButton
             android:id="@+id/addCityButton"
             android:layout_width="30dp"
@@ -95,33 +132,6 @@
             android:paddingEnd="10dp"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/userCityList"
-        android:background="@android:color/white"
-        android:alpha="0.5"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/userCityList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/topBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="16dp"/>
-    <ProgressBar
-        android:id="@+id/activityIndicator"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:indeterminateTint="@android:color/white"
-        app:layout_constraintTop_toTopOf="@id/userCityList"
-        app:layout_constraintBottom_toBottomOf="@id/userCityList"
-        app:layout_constraintStart_toStartOf="@id/userCityList"
-        app:layout_constraintEnd_toEndOf="@id/userCityList"
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

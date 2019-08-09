@@ -3,30 +3,19 @@ package kishimotovn.pocketworksWeather.features.home.adapter
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.ColorDrawable
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import kishimotovn.pocketworksWeather.utils.TextDrawable
+import kishimotovn.pocketworksWeather.R
 
 
 abstract class SwipeToDeleteCallback(val context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-    private val textColor = Color.parseColor("#ffffff")
-    private val deleteIcon = TextDrawable
-            .builder()
-            .beginConfig()
-            .fontSize(50)
-            .bold()
-            .endConfig()
-            .buildRect("Delete", this.textColor)
+    private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete_black_24dp)!!
     private val intrinsicWidth = deleteIcon.intrinsicWidth
     private val intrinsicHeight = deleteIcon.intrinsicHeight
     private val background = ColorDrawable()
     private val backgroundColor = Color.parseColor("#f44336")
     private val clearPaint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
-
-    override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-        if (viewHolder?.adapterPosition == 10) return 0
-        return super.getMovementFlags(recyclerView, viewHolder)
-    }
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
         return false

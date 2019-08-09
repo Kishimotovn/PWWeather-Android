@@ -77,7 +77,6 @@ class TextDrawable private constructor(builder: Builder) : ShapeDrawable(builder
         canvas.drawText(text ?: "N/A", width / 2f, height / 2f - (textPaint.descent() + textPaint.ascent()) / 2f, textPaint)
 
         canvas.restoreToCount(count)
-
     }
 
     private fun drawBorder(canvas: Canvas) {
