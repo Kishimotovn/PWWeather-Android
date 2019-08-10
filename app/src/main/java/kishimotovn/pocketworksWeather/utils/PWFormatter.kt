@@ -30,5 +30,44 @@ class PWFormatter {
             spannedString.setSpan(StyleSpan(Typeface.BOLD), 0, directionString.length,0)
             return spannedString
         }
+
+        fun temperatureString(value: Double, unitSystem: PWUnitSystem): String {
+            var measure = value
+            var unit = "°F"
+
+            when(unitSystem) {
+                PWUnitSystem.imperial -> measure = measure*1.8 + 32
+                PWUnitSystem.metric -> unit = "°C"
+            }
+
+            val formatter = DecimalFormat("#")
+            val formattedMeasure = formatter.format(measure)
+
+            return "$formattedMeasure $unit"
+        }
+
+        fun pressureString(value: Double): String {
+            val formatter = DecimalFormat("#.###")
+            val measure = formatter.format(value)
+
+            return "$measure hPa"
+        }
+
+        fun lengthString(value: Double, unitSystem: PWUnitSystem): String {
+            var measure = value
+            var unit = "mi"
+            when(unitSystem) {
+                PWUnitSystem.imperial -> measure = (measure) / 1609.344
+                PWUnitSystem.metric -> {
+                    measure = measure / 1000
+                    unit = "km"
+                }
+            }
+
+            val formatter = DecimalFormat("#.#")
+            val formattedMeasure = formatter.format(measure)
+
+            return "$formattedMeasure $unit"
+        }
     }
 }

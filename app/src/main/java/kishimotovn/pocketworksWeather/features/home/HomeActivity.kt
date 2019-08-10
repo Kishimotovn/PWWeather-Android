@@ -19,6 +19,7 @@ import kishimotovn.pocketworksWeather.data.local.models.PWCity
 import kishimotovn.pocketworksWeather.data.local.models.PWUnitSystem
 import kishimotovn.pocketworksWeather.data.remote.models.CityWeather
 import kishimotovn.pocketworksWeather.databinding.ActivityHomeBinding
+import kishimotovn.pocketworksWeather.features.details.DetailsActivity
 import kishimotovn.pocketworksWeather.features.home.adapter.HomeWeatherListAdapter
 import kishimotovn.pocketworksWeather.features.home.adapter.SwipeToDeleteCallback
 import kishimotovn.pocketworksWeather.features.search.SearchActivity
@@ -44,7 +45,9 @@ class HomeActivity : BaseActivity(), HomeWeatherListAdapter.Delegate {
     }
 
     override fun didSelect(item: CityWeather, index: Int) {
-
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra(DetailsActivity.CITY_WEATHER_DATA, item)
+        this.startActivity(intent)
     }
 
     private fun bindUI() {

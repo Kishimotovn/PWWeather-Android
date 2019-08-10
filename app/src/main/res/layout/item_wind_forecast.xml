@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="kishimotovn.pocketworksWeather.features.details.viewmodels.ForecastItemViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        tools:background="@android:color/black">
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textAlignment="center"
+            tools:text="07:40"
+            android:text="@{viewModel.time}"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            />
+        <ImageView
+            android:id="@+id/weatherIconImageView"
+            android:layout_width="130dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timeTextView"
+            app:layout_constraintBottom_toTopOf="@id/windInfoTextView"
+            app:image_url="@{viewModel.icon}"/>
+        <TextView
+            android:id="@+id/windInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAlignment="center"
+            tools:text="NSW 7 m/s"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:text="@{viewModel.windInfo}"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

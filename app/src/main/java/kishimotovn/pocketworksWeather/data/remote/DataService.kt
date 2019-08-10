@@ -9,6 +9,6 @@ interface DataService {
     @GET("data/2.5/group")
     fun getWeatherDataForCities(@Query("id") cityIds: String): Call<CityWeatherList>
 
-    @GET("data/2.5/weather")
-    fun getWeatherDataForCity(@Query("id") cityId: String): Call<CityWeatherList>
+    @GET("data/2.5/forecast")
+    fun getWeatherForecastDataForCity(@Query("id") cityId: String): Call<CityWeatherList>
 }

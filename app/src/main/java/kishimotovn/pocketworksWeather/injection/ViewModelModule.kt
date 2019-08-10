@@ -6,6 +6,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import kishimotovn.pocketworksWeather.factory.AppViewModelFactory
+import kishimotovn.pocketworksWeather.features.details.DetailsViewModel
 import kishimotovn.pocketworksWeather.features.home.HomeViewModel
 import kishimotovn.pocketworksWeather.features.landing.LandingViewModel
 import kishimotovn.pocketworksWeather.features.search.SearchViewModel
@@ -26,6 +27,11 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     internal abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailsViewModel::class)
+    internal abstract fun bindDetailsViewModel(detailsViewModel: DetailsViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(appViewModelFactory: AppViewModelFactory) : ViewModelProvider.Factory
