@@ -20,6 +20,7 @@ import kishimotovn.pocketworksWeather.features.search.adapter.SearchResultListAd
 import kishimotovn.pocketworksWeather.features.shared.viewmodels.HeaderBarViewModel
 import android.content.Intent
 import android.graphics.Color
+import android.view.WindowManager
 import kishimotovn.pocketworksWeather.R
 
 
@@ -38,6 +39,7 @@ class SearchActivity : BaseActivity(), SearchResultListAdapter.Delegate {
         this.setContentView(this.binding.root)
         this.initializeUI()
         this.bindUI()
+        this.showKeyboard()
     }
 
     override fun didSelect(item: PWCity, index: Int) {
@@ -45,6 +47,10 @@ class SearchActivity : BaseActivity(), SearchResultListAdapter.Delegate {
         resultIntent.putExtra(SEARCH_CITY_RESULT_INTENT_KEY, item)
         this.setResult(SEARCH_CITY_FINISH_RESULT_CODE, resultIntent)
         this.finish()
+    }
+
+    private fun showKeyboard() {
+        this.binding.searchEditText.requestFocus()
     }
 
     private fun bindUI() {
