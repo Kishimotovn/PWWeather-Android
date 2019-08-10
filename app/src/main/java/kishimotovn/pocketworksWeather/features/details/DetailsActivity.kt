@@ -1,5 +1,6 @@
 package kishimotovn.pocketworksWeather.features.details
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +53,12 @@ class DetailsActivity : BaseActivity() {
         })
     }
 
+    private fun openWebsite() {
+        val openURL = Intent(Intent.ACTION_VIEW)
+        openURL.data = this.viewModel.openWeatherUrl
+        this.startActivity(openURL)
+    }
+
     private fun initializeUI() {
         val context = this
 
@@ -67,6 +74,7 @@ class DetailsActivity : BaseActivity() {
             this.viewModel = context.viewModel
             this.forecastRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
             this.forecastRecyclerView.adapter = context.adapter
+            this.openWeatherButton.setOnClickListener { context.openWebsite() }
             this.executePendingBindings()
         }
     }

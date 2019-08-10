@@ -1,5 +1,6 @@
 package kishimotovn.pocketworksWeather.features.details
 
+import android.net.Uri
 import android.text.Spanned
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MediatorLiveData
@@ -32,6 +33,8 @@ class DetailsViewModel @Inject constructor(private val repository: DetailsReposi
     var cityWeather: CityWeather? = null
     val forecastWeatherData = MediatorLiveData<List<CityWeather>>()
     val currentUnitSystem = this.repository.getUnitSystem()
+
+    val openWeatherUrl: Uri = Uri.parse("https://openweathermap.org")
 
     fun loadForecast() {
         this.isLoadingForecast.value = true
