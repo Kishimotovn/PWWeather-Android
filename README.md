@@ -11,7 +11,7 @@
 # **About the project**
 
 - Programming Language used: Kotlin
-- Platform: Android (21 - 28)
+- Platform: Android (24 - 28)
 - General architecture: MVVM + Android Architecture Components [Android Architecture Components](https://developer.android.com/topic/libraries/architecture)
 - The project source control follow [GitFlow](https://datasift.github.io/gitflow/IntroducingGitFlow.html) branching model
 - Dependency Manager: Gradle
@@ -31,12 +31,22 @@
 - Local storage with Room for faster data load.
 - Async using coroutines with scope and lifecycle awareness.
 - UI Data binding.
-- Live Data + Retrofit custom Call Adapter
-- Dependencies Injection with Dagger
-- [In Progress] Multiple Unit System in app (metric/imperial)
-- [In Progress] Location local time (that sync with device time as well)
-- [In Progress] Weather forecast with images
-- [In Progress] Dynamic Weather description
+- Swipe to delete.
+- Dependencies Injection with Dagger.
+- Multiple Unit System in app (metric/imperial).
+- Location local time (that sync with device time as well).
+- Weather forecast with images.
+- Dynamic Weather description.
+
+## Implementation Highlights:
+
+- Use of kotlin new features such as Result class, Enum class, class extensions for faster and better syntax.
+- Custom databinding adapters.
+- Life cycle awareness coroutines with the new liveData { emit() } syntax.
+- Databinding with ObservableFields.
+- Room implementation with DAOs and dependency injections.
+- Custom JSON adapter for mochi with date formats.
+- Design is adapted to Android, but still share familiarity with the iOS version.
 
 ## Features that could be done if had more time:
 
