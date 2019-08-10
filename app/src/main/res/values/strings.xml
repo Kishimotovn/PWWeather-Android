@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Template</string>
+    <string name="app_name">PocketWorks Weather</string>
+    <string name="landing_loading_text">Loading Data</string>
+    <string name="alert_dismiss_button_title">Ok</string>
+    <string name="alert_error_title">Error</string>
+    <string name="details_today_text">TODAY</string>
 </resources>
