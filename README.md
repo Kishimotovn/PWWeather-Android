@@ -58,3 +58,13 @@
 - [Dagger](https://github.com/google/dagger): Used for Dependency Injections
 - [Retrofit](https://square.github.io/retrofit/): Used for network layer
 - [Glide](https://github.com/bumptech/glide): Used for fast image loading
+
+## Some screen shots of the app:
+
+![Home Screen](/screenshots/home.png?raw=true 'Home Screen')
+
+![Home Screen](/screenshots/home2.png?raw=true 'Swipe to remove city')
+
+![Details Screen](/screenshots/details.png?raw=true 'Details Screen')
+
+![Search Screen](/screenshots/search.png?raw=true 'Search Screen')
